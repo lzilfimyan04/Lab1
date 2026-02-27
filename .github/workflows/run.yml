@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '*/2 * * * *'
-    issues:
+  issues:
     types:
       - opened
       - closed
