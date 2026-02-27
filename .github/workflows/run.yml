@@ -6,6 +6,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '*/2 * * * *'
+    issues:
+    types:
+      - opened
+      - closed
 
 
 jobs:
