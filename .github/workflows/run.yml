@@ -2,7 +2,7 @@ name: Build C++ Hello
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "mydevbranch" ]
   pull_request:
     branches: [ "main" ]
 
