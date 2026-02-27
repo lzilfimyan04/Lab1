@@ -2,7 +2,11 @@ name: Build C++ Hello
 
 on:
   push:
+    paths:
+      'cpp/hello.cpp'
   pull_request:
+    paths:
+        'cpp/hello.cpp'
 
 jobs:
   build:
