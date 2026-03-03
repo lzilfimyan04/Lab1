@@ -1,0 +1,50 @@
+name: Run Selected C++ File
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_choice:
+        description: "Select C++ file to run"
+        required: true
+        type: choice
+        options:
+          - a.cpp
+          - b.cpp
+          - c.cpp
+
+      create_exe:
+        description: "Compile the file?"
+        required: true
+        type: boolean
+        default: true
+
+      user_text:
+        description: "Text to print using cout"
+        required: true
+        type: string
+        default: "Hello from GitHub Actions"
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile selected file
+        if: ${{ github.event.inputs.create_exe == 'true' }}
+        run: |
+          g++ "${{ github.event.inputs.file_choice }}" -o program
+
+      - name: Run executable with user text
+        if: ${{ github.event.inputs.create_exe == 'true' }}
+        run: |
+          ./program "${{ github.event.inputs.user_text }}"
+
+      - name: Skip compilation
+        if: ${{ github.event.inputs.create_exe == 'false' }}
+        run: echo "Compilation skipped."
