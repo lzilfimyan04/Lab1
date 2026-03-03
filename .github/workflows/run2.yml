@@ -1,0 +1,25 @@
+name: Run Hello2
+
+on:
+  workflow_run:
+    workflows: ["Run Hello"]
+    types:
+      - completed
+
+jobs:
+  run-hello2:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile hello2.cpp
+        run: g++ hello2.cpp -o hello2
+
+      - name: Run hello2
+        run: ./hello2
