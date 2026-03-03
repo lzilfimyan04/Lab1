@@ -1,0 +1,25 @@
+name: Run Any C++ File
+
+on:
+  workflow_dispatch:
+    inputs:
+      filename:
+        description: "Enter C++ file name (example: hello1.cpp)"
+        required: true
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile selected file
+        run: g++ "${{ github.event.inputs.filename }}" -o program
+
+      - name: Run program
+        run: ./program
