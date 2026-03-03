@@ -1,29 +1,22 @@
-name: Build C++ Hello
+name: Run Hello
 
 on:
   push:
-  pull_request:
   workflow_dispatch:
-  
-  issues:
-    types:
-      - opened
-      - closed
-
 
 jobs:
-  build:
+  run-hello1:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Install g++
-      run: sudo apt-get update && sudo apt-get install -y g++
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
 
-    - name: Compile hello.cpp
-      run: g++ -std=c++17 hello.cpp -o hello
+      - name: Compile hello.cpp
+        run: g++ hello.cpp -o hello
 
-    - name: Run program
-      run: ./hello
+      - name: Run hello
+        run: ./hello
