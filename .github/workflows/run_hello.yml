@@ -1,0 +1,22 @@
+name: Build and Run hello.cpp
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile hello.cpp
+        run: g++ hello.cpp -o hello
+
+      - name: Run program
+        run: ./hello
