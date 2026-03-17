@@ -1,0 +1,39 @@
+name: Run Two C++ Files
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile hello.cpp
+        run: g++ hello.cpp -o hello
+
+      - name: Run hello.cpp
+        run: ./hello
+
+  run-hello2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt update && sudo apt install -y g++
+
+      - name: Compile hello2.cpp
+        run: g++ hello2.cpp -o hello2
+
+      - name: Run hello2.cpp
+        run: ./hello2
